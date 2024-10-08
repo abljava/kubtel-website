@@ -1,5 +1,7 @@
 // 'use client';
 
+import qs from 'qs';
+
 import { Button } from '@/components/ui/button';
 import { simpleHeroData } from '@/components/hero/hero-data';
 import { CustomSection } from '@/components/custom-section';
@@ -10,14 +12,37 @@ import { H2 } from '@/components/text/text';
 import { getStrapiData } from '@/lib/strapi-data';
 import { HeroSectionStatic } from '@/components/hero/hero-section-static';
 
+const aboutPageQuery = qs.stringify({
+  populate: {
+    blocks: {
+      // asking to populate the blocks dynamic zone
+      on: {
+        // using a detailed population strategy to explicitly define what you want
+        'layout.hero-section': {
+          populate: {
+            image: {
+              fields: ['url', 'alternativeText'],
+            },
+            link: {
+              populate: true,
+            },
+          },
+        },
+      },
+    },
+  },
+});
+
 export default async function AboutPage() {
-  const strapiData = await getStrapiData('/api/about');
-  const { data, heading, text_1, text_2, text_3, text_4, title, hero_image } = strapiData.data;
+  const strapiData = await getStrapiData('/api/about', aboutPageQuery);
+  // console.dir(strapiData, {depth: null});
+
+  const { heading, text_1, text_2, text_3, text_4, blocks } = strapiData.data;
 
   return (
     <>
       <section className='w-full max-w-[1280px] bg-[#EEF6FF] px-5 mx-auto lg:px-9 xl:px-20'>
-        <HeroSectionStatic heroImage={hero_image} title={title} />
+        <HeroSectionStatic data={blocks[0]} />
         <TopRounder />
         <div className='mt-14'>
           <H2 className='-my-6 px-6 text-foreground'>{heading}</H2>
@@ -36,21 +61,3 @@ export default async function AboutPage() {
     </>
   );
 }
-
-// <main>
-//   <section className='w-full mt-12 p-6'>
-//     <div className='bg-gradient-to-b from-[#FF1F70] from-0% via-[#FF3D9A] via-51% to-[#FFC6AD] to-83%'>
-//       <h1 className='mb-8'>{title}</h1>
-//       <h3>{heading}</h3>
-//       <p>{text}</p>
-//       <Button
-//         className='w-48'
-//         variant='kubtel'
-//         type='button'
-//         // onClick={() => router.back()}
-//       >
-//         Получить консультацию
-//       </Button>
-//     </div>
-//   </section>
-// </main>

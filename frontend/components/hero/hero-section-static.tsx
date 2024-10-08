@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 
 import Image from 'next/image';
 import { Logo } from '@/components/ui/logo';
@@ -9,16 +10,41 @@ import { cn } from '@/lib/utils';
 import { H1 } from '@/components/text/text';
 import { SimpleHeroDataProps } from './hero-data';
 import { getStrapiData } from '@/lib/strapi-data';
+import img from '@/public/images/hero/contacts.png';
+
+interface ImageProps {
+  id: number;
+  documentId: string;
+  url: string;
+  alternativeText: string | null;
+}
+
+interface LinkProps {
+  id: number;
+  url: string;
+  text: string;
+}
 
 interface HeroSectionStaticProps {
-  heroImage: any;
-  title?: string;
+  id: number;
+  documentId: string;
+  __component: string;
+  heading: string;
+  subHeading: string;
+  image: ImageProps;
+  link: LinkProps;
   className?: string;
 }
 
+export function HeroSectionStatic({
+  data,
+}: {
+  readonly data: HeroSectionStaticProps;
+}) {
+  const { heading, image, link, className } = data;
+  const imageURL = 'http://localhost:1337' + image.url;
+  // console.log(link.url);
 
-
-export function HeroSectionStatic({ heroImage, title, className }: HeroSectionStaticProps) {
   return (
     <div
       className={cn(
@@ -27,10 +53,10 @@ export function HeroSectionStatic({ heroImage, title, className }: HeroSectionSt
       )}
     >
       <div className='relative flex flex-col h-[414px] mx-6 mt-8 justify-between'>
-        <H1 className='relative z-10 ml-2'>{title}</H1>
+        <H1 className='relative z-10 ml-2'>{heading}</H1>
         <div className='absolute w-full h-full  inset-0 p-5 '>
           <Image
-            src={heroImage}
+            src={imageURL}
             alt='hero'
             style={{
               objectFit: 'cover',
@@ -40,20 +66,23 @@ export function HeroSectionStatic({ heroImage, title, className }: HeroSectionSt
             height={283}
           />
         </div>
-        <Button
-          variant='kubtel'
-          size='md'
-          className='relative mb-40 w-full md:w-60'
-        >
-          Получить консультацию
-          <Image
-            className='ml-2'
-            src='/images/icons/arrow-to-right-3.svg'
-            alt='arrow-icon'
-            width={24}
-            height={24}
-          />
-        </Button>
+
+        <Link href={link.url}>
+          <Button
+            variant='kubtel'
+            size='md'
+            className='relative mb-40 w-full md:w-60'
+          >
+            {link.text}
+            <Image
+              className='ml-2'
+              src='/images/icons/arrow-to-right-3.svg'
+              alt='arrow-icon'
+              width={24}
+              height={24}
+            />
+          </Button>
+        </Link>
       </div>
 
       <Logo className='absolute bottom-20 left-0 p-0 mx-6 sm:hidden' />
