@@ -1,0 +1,26 @@
+{
+  "kind": "singleType",
+  "collectionName": "contactss",
+  "info": {
+    "singularName": "contacts",
+    "pluralName": "contactss",
+    "displayName": "Contacts",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "heading": {
+      "type": "string"
+    },
+    "blocks": {
+      "type": "dynamiczone",
+      "components": [
+        "layout.hero-section",
+        "layout.contacts-info"
+      ]
+    }
+  }
+}

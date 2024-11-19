@@ -1,0 +1,32 @@
+{
+  "collectionName": "components_components_devices",
+  "info": {
+    "displayName": "Device",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "model": {
+      "type": "text"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "features": {
+      "type": "component",
+      "repeatable": true,
+      "component": "components.feature"
+    },
+    "price": {
+      "type": "integer"
+    }
+  }
+}

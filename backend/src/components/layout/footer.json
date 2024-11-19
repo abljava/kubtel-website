@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_layout_footers",
+  "info": {
+    "displayName": "Footer",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "footerLinks": {
+      "type": "component",
+      "repeatable": true,
+      "component": "layout.footer-links"
+    },
+    "tel": {
+      "type": "string"
+    },
+    "agreement": {
+      "type": "text"
+    }
+  }
+}

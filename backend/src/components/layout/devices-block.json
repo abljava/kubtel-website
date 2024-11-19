@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_layout_devices_blocks",
+  "info": {
+    "displayName": "Devices Block"
+  },
+  "options": {},
+  "attributes": {
+    "devices": {
+      "type": "component",
+      "repeatable": true,
+      "component": "components.device"
+    }
+  }
+}

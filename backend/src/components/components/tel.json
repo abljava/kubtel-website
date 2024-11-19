@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_components_tels",
+  "info": {
+    "displayName": "Tel"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string"
+    },
+    "number": {
+      "type": "string"
+    }
+  }
+}

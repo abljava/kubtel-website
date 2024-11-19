@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_layout_contacts_infos",
+  "info": {
+    "displayName": "Contact Info",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "city": {
+      "type": "string"
+    },
+    "address": {
+      "type": "text"
+    },
+    "tel": {
+      "displayName": "Tel",
+      "type": "component",
+      "repeatable": true,
+      "component": "components.tel"
+    }
+  }
+}
