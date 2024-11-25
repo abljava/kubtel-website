@@ -62,6 +62,75 @@ export interface SharedMedia extends Struct.ComponentSchema {
   };
 }
 
+export interface ComponentsTel extends Struct.ComponentSchema {
+  collectionName: 'components_components_tels';
+  info: {
+    displayName: 'Tel';
+  };
+  attributes: {
+    heading: Schema.Attribute.String;
+    number: Schema.Attribute.String;
+  };
+}
+
+export interface ComponentsSlider extends Struct.ComponentSchema {
+  collectionName: 'components_components_sliders';
+  info: {
+    displayName: 'Slide';
+    description: '';
+  };
+  attributes: {
+    title: Schema.Attribute.String;
+    description: Schema.Attribute.Text;
+    contentText: Schema.Attribute.Text;
+    contentButton: Schema.Attribute.String;
+    image: Schema.Attribute.Media<'images'>;
+    imageSmall: Schema.Attribute.Media<'images'>;
+  };
+}
+
+export interface ComponentsLink extends Struct.ComponentSchema {
+  collectionName: 'components_components_links';
+  info: {
+    displayName: 'Link';
+    description: '';
+  };
+  attributes: {
+    url: Schema.Attribute.String;
+    text: Schema.Attribute.String;
+    isExternal: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    icon: Schema.Attribute.Media<'images'>;
+  };
+}
+
+export interface ComponentsFeature extends Struct.ComponentSchema {
+  collectionName: 'components_components_features';
+  info: {
+    displayName: 'Feature';
+    description: '';
+  };
+  attributes: {
+    title: Schema.Attribute.String;
+    description: Schema.Attribute.Text;
+    icon: Schema.Attribute.Media<'images'>;
+  };
+}
+
+export interface ComponentsDevice extends Struct.ComponentSchema {
+  collectionName: 'components_components_devices';
+  info: {
+    displayName: 'Device';
+    description: '';
+  };
+  attributes: {
+    title: Schema.Attribute.String;
+    model: Schema.Attribute.Text;
+    image: Schema.Attribute.Media<'images'>;
+    features: Schema.Attribute.Component<'components.feature', true>;
+    price: Schema.Attribute.Integer;
+  };
+}
+
 export interface LayoutSlider extends Struct.ComponentSchema {
   collectionName: 'components_layout_sliders';
   info: {
@@ -157,75 +226,6 @@ export interface LayoutContactsInfo extends Struct.ComponentSchema {
   };
 }
 
-export interface ComponentsTel extends Struct.ComponentSchema {
-  collectionName: 'components_components_tels';
-  info: {
-    displayName: 'Tel';
-  };
-  attributes: {
-    heading: Schema.Attribute.String;
-    number: Schema.Attribute.String;
-  };
-}
-
-export interface ComponentsSlider extends Struct.ComponentSchema {
-  collectionName: 'components_components_sliders';
-  info: {
-    displayName: 'Slide';
-    description: '';
-  };
-  attributes: {
-    title: Schema.Attribute.String;
-    description: Schema.Attribute.Text;
-    contentText: Schema.Attribute.Text;
-    contentButton: Schema.Attribute.String;
-    image: Schema.Attribute.Media<'images'>;
-    imageSmall: Schema.Attribute.Media<'images'>;
-  };
-}
-
-export interface ComponentsLink extends Struct.ComponentSchema {
-  collectionName: 'components_components_links';
-  info: {
-    displayName: 'Link';
-    description: '';
-  };
-  attributes: {
-    url: Schema.Attribute.String;
-    text: Schema.Attribute.String;
-    isExternal: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
-    icon: Schema.Attribute.Media<'images'>;
-  };
-}
-
-export interface ComponentsFeature extends Struct.ComponentSchema {
-  collectionName: 'components_components_features';
-  info: {
-    displayName: 'Feature';
-    description: '';
-  };
-  attributes: {
-    title: Schema.Attribute.String;
-    description: Schema.Attribute.Text;
-    icon: Schema.Attribute.Media<'images'>;
-  };
-}
-
-export interface ComponentsDevice extends Struct.ComponentSchema {
-  collectionName: 'components_components_devices';
-  info: {
-    displayName: 'Device';
-    description: '';
-  };
-  attributes: {
-    title: Schema.Attribute.String;
-    model: Schema.Attribute.Text;
-    image: Schema.Attribute.Media<'images'>;
-    features: Schema.Attribute.Component<'components.feature', true>;
-    price: Schema.Attribute.Integer;
-  };
-}
-
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
@@ -234,6 +234,11 @@ declare module '@strapi/strapi' {
       'shared.rich-text': SharedRichText;
       'shared.quote': SharedQuote;
       'shared.media': SharedMedia;
+      'components.tel': ComponentsTel;
+      'components.slider': ComponentsSlider;
+      'components.link': ComponentsLink;
+      'components.feature': ComponentsFeature;
+      'components.device': ComponentsDevice;
       'layout.slider': LayoutSlider;
       'layout.hero-section': LayoutHeroSection;
       'layout.header': LayoutHeader;
@@ -242,11 +247,6 @@ declare module '@strapi/strapi' {
       'layout.devices-section': LayoutDevicesSection;
       'layout.devices-block': LayoutDevicesBlock;
       'layout.contacts-info': LayoutContactsInfo;
-      'components.tel': ComponentsTel;
-      'components.slider': ComponentsSlider;
-      'components.link': ComponentsLink;
-      'components.feature': ComponentsFeature;
-      'components.device': ComponentsDevice;
     }
   }
 }
